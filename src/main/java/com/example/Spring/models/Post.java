@@ -61,8 +61,7 @@ public class Post {
     }
 
     public String getPost_date() {
-        DateTimeFormatter date = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
-        return post_date.format(date);
+        return post_date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     public void setPost_date(LocalDate post_date) {
