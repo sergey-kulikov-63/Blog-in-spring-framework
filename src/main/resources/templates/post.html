@@ -20,11 +20,16 @@
     <hr>
     <h2>Комментарии</h2>
     <hr>
-        <div class="post" th:each="com:${comments}" id="com">
+    <div class="post" th:each="com:${comments}" id="com">
             <h3 th:text="${com.getUser_name()}"></h3>
             <h6 th:text="${com.getComment_text()}"></h6>
             <p align="right" style="color: #9d9d9d" th:text="${com.getComment_date()}">
         </div>
+    <form th:action="'/'+${post.post_id}" method="post">
+        <input type="text" name="name" placeholder="Имя"><br>
+        <textarea name="text" placeholder="Текст"></textarea><br>
+        <button type="submit" style="width: 32px; height: 35px"></button>
+    </form>
 </div>
 <script>
     window.onload = function() {
