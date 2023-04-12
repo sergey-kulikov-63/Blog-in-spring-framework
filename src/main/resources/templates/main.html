@@ -12,11 +12,11 @@
 </header>
 <div class="container" style="padding-top: 105px">
     <div class="post" th:each="post:${posts}" id="post">
-        <a id="link" class="link" th:href="${post.post_id}">
-            <h1 th:text="${post.post_title}"></h1>
+        <a id="link" class="link" th:href="${post.getPost_id()}">
+            <h1 th:text="${post.getPost_title()}"></h1>
         </a>
         <hr>
-        <h5 th:text="${post.post_anons}"></h5>
+        <h5 th:text="${post.getPost_anons()}"></h5>
         <p align="right" style="color: #9d9d9d" th:text="${post.getPost_date()}"></p>
     </div>
 </div>

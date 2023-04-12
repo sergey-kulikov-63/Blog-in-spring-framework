@@ -2,6 +2,9 @@ package com.example.Spring.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 @Entity
@@ -12,16 +15,10 @@ public class Comment {
     private Long comment_id;
     private String user_name;
     private String comment_text;
-    private Date comment_date;
-
-    public Comment() {
-    }
-
-    public Comment(String user_name, String comment_text, Date comment_date) {
-        this.user_name = user_name;
-        this.comment_text = comment_text;
-        this.comment_date = comment_date;
-    }
+    private LocalDate comment_date;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     public Long getComment_id() {
         return comment_id;
@@ -47,11 +44,29 @@ public class Comment {
         this.comment_text = comment_text;
     }
 
-    public Date getComment_date() {
-        return comment_date;
+    public String getComment_date() {
+        return comment_date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
-    public void setComment_date(Date comment_date) {
+    public void setComment_date(LocalDate comment_date) {
         this.comment_date = comment_date;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
+    public Comment(String user_name, String comment_text, LocalDate comment_date, Post post) {
+        this.user_name = user_name;
+        this.comment_text = comment_text;
+        this.comment_date = comment_date;
+        this.post = post;
+    }
+
+    public Comment() {
     }
 }
