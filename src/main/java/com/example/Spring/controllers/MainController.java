@@ -2,10 +2,13 @@ package com.example.Spring.controllers;
 
 import com.example.Spring.models.Comment;
 import com.example.Spring.models.Post;
+import com.example.Spring.models.User;
 import com.example.Spring.repositories.CommentRepo;
 import com.example.Spring.repositories.PostRepo;
 import com.example.Spring.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.object.SqlQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +27,8 @@ public class MainController {
     private CommentRepo commentRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
     @GetMapping("/")
     public String main(Model model){
         Iterable<Post> posts = postRepo.findAll();
@@ -35,15 +40,23 @@ public class MainController {
         Post post = postRepo.findById(id).orElse(null);
         List<Comment> comments = commentRepo.findByPost(post);
         model.addAttribute("post", post);
-        model.addAttribute("comments", comments);
+        if (comments != null){
+            model.addAttribute("comments", comments);
+        }
         return "post";
     }
 
     @PostMapping("/{id}")
-    public String leaveComment(@PathVariable Long id, @RequestParam String name, @RequestParam String text,
-                              Model model){
-        Comment comment = new Comment(name,text, LocalDate.now(),postRepo.findById(id).orElse(null));
+    public String leaveComment(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
+                               @RequestParam String text, Model model){
+        Comment comment = new Comment(name,text,email,LocalDate.now(),postRepo.findById(id).orElse(null));
+        User user = new User(name,email);
         commentRepo.save(comment);
+        String sql = "SELECT count(*) FROM users WHERE user_name = ? and user_email = ?";
+        int userCount = jdbcTemplate.queryForObject(sql, Integer.class, name, email);
+        if (userCount == 0){
+            userRepo.save(user);
+        }
         return "redirect:/{id}";
     }
 }

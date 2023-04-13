@@ -15,10 +15,19 @@ public class Comment {
     private Long comment_id;
     private String user_name;
     private String comment_text;
+    private String user_email;
     private LocalDate comment_date;
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    public String getUser_email() {
+        return user_email;
+    }
+
+    public void setUser_email(String user_email) {
+        this.user_email = user_email;
+    }
 
     public Long getComment_id() {
         return comment_id;
@@ -60,9 +69,10 @@ public class Comment {
         this.post = post;
     }
 
-    public Comment(String user_name, String comment_text, LocalDate comment_date, Post post) {
+    public Comment(String user_name, String comment_text, String user_email, LocalDate comment_date, Post post) {
         this.user_name = user_name;
         this.comment_text = comment_text;
+        this.user_email = user_email;
         this.comment_date = comment_date;
         this.post = post;
     }

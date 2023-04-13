@@ -26,8 +26,9 @@
             <p align="right" style="color: #9d9d9d" th:text="${com.getComment_date()}">
         </div>
     <form th:action="'/'+${post.post_id}" method="post">
-        <input type="text" name="name" placeholder="Имя"><br>
-        <textarea name="text" placeholder="Текст"></textarea><br>
+        <input id="input1" type="text" name="name" placeholder="Имя">
+        <input id="input2" type="text" name="email" placeholder="Почта (никому не видна)"><br>
+        <textarea id="textarea" name="text" placeholder="Текст комментария"></textarea><br>
         <button type="submit" style="width: 32px; height: 35px"></button>
     </form>
 </div>
@@ -40,6 +41,9 @@
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');
         document.getElementById('theme-toggle').classList.add('dark-mode');
+        document.getElementById('input1').classList.add('dark-mode');
+        document.getElementById('input2').classList.add('dark-mode');
+        document.getElementById('textarea').classList.add('dark-mode');
         document.querySelectorAll("#com").forEach(el => {el.classList.add('dark-mode')});
         document.getElementById('post').classList.add('dark-mode');
     }
@@ -48,6 +52,9 @@
         document.getElementById('header').classList.toggle('dark-mode');
         document.getElementById('theme-toggle').classList.toggle('dark-mode');
         document.getElementById('post').classList.toggle('dark-mode');
+        document.getElementById('input1').classList.toggle('dark-mode');
+        document.getElementById('input2').classList.toggle('dark-mode');
+        document.getElementById('textarea').classList.toggle('dark-mode');
         document.querySelectorAll("#com").forEach(el => {el.classList.toggle('dark-mode')});
         const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
         localStorage.setItem('theme', newTheme);
@@ -58,6 +65,33 @@
 <style>
 </style>
 <style>
+    input{
+        width: 25%;
+        height: 45px;
+        position: static;
+        margin-bottom: 10px;
+        background: #e8e8e8;
+        border-radius: 15px;
+        border: none;
+        padding-left: 1%;
+    }
+    textarea{
+        width: 65%;
+        height: 90px;
+        position: static;
+        background: #e8e8e8;
+        border-radius: 15px;
+        border: none;
+        padding-left: 1%;
+    }
+    input.dark-mode{
+        background: #393939;
+        color: #f2f2f2;
+    }
+    textarea.dark-mode{
+        background: #393939;
+        color: #f2f2f2;
+    }
     .post {
         width: 100%;
         display: block;
