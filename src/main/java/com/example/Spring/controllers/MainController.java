@@ -52,9 +52,9 @@ public class MainController {
         Comment comment = new Comment(name,text,email,LocalDate.now(),postRepo.findById(id).orElse(null));
         User user = new User(name,email);
         commentRepo.save(comment);
-        String sql = "SELECT count(*) FROM users WHERE user_name = ? and user_email = ?";
-        int userCount = jdbcTemplate.queryForObject(sql, Integer.class, name, email);
-        if (userCount == 0){
+        if (jdbcTemplate.queryForObject(
+                "SELECT count(*) FROM users WHERE user_name = ? and user_email = ?",
+                Integer.class, name, email) == 0){
             userRepo.save(user);
         }
         return "redirect:/{id}";
