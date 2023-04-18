@@ -1,2 +1,2 @@
 # Spring-app-for-portfolio
-My Spring project
+My Spring project (blog)
