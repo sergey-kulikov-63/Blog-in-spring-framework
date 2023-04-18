@@ -18,7 +18,7 @@ public class Post {
     private String post_text;
     private LocalDate post_date;
     @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    private List<Comment> comments; // содержит список комментариев к посту
 
     public Long getPost_id() {
         return post_id;
@@ -54,7 +54,7 @@ public class Post {
 
     public String getPost_date() {
         return post_date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
-    }
+    } // геттер, который возвращает дату в нужном формате
 
     public void setPost_date(LocalDate post_date) {
         this.post_date = post_date;

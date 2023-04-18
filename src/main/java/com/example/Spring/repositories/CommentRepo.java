@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CommentRepo extends JpaRepository<Comment, Long> {
-    List<Comment> findByPost(Post post);
+public interface CommentRepo extends JpaRepository<Comment, Long> { // наследование методов от JpaRepository
+    List<Comment> findByPost(Post post); // дополнительный метод - поиск по посту
+    // нужен для поиска комментариев к опеделённому посту
 
 }

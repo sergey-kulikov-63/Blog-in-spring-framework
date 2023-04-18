@@ -19,7 +19,7 @@ public class Comment {
     private LocalDate comment_date;
     @ManyToOne
     @JoinColumn(name = "post_id")
-    private Post post;
+    private Post post; // пост, к которому принадлежит комментарий
 
     public String getUser_email() {
         return user_email;
@@ -55,7 +55,7 @@ public class Comment {
 
     public String getComment_date() {
         return comment_date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
-    }
+    } // геттер, который возвращает дату в нужном формате
 
     public void setComment_date(LocalDate comment_date) {
         this.comment_date = comment_date;

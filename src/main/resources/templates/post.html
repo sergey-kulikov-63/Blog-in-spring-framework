@@ -29,7 +29,7 @@
         <input id="input1" type="text" name="name" placeholder="Имя">
         <input id="input2" type="text" name="email" placeholder="Почта (никому не видна)"><br>
         <textarea id="textarea" name="text" placeholder="Текст комментария"></textarea><br>
-        <button type="submit" style="width: 32px; height: 35px"></button>
+        <button class="submit" id="submit" type="submit">Оставить комментарий</button>
     </form>
 </div>
 <script>
@@ -43,6 +43,7 @@
         document.getElementById('theme-toggle').classList.add('dark-mode');
         document.getElementById('input1').classList.add('dark-mode');
         document.getElementById('input2').classList.add('dark-mode');
+        document.getElementById('submit').classList.add('dark-mode');
         document.getElementById('textarea').classList.add('dark-mode');
         document.querySelectorAll("#com").forEach(el => {el.classList.add('dark-mode')});
         document.getElementById('post').classList.add('dark-mode');
@@ -54,6 +55,7 @@
         document.getElementById('post').classList.toggle('dark-mode');
         document.getElementById('input1').classList.toggle('dark-mode');
         document.getElementById('input2').classList.toggle('dark-mode');
+        document.getElementById('submit').classList.toggle('dark-mode');
         document.getElementById('textarea').classList.toggle('dark-mode');
         document.querySelectorAll("#com").forEach(el => {el.classList.toggle('dark-mode')});
         const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
@@ -63,8 +65,18 @@
 </body>
 </html>
 <style>
-</style>
-<style>
+    .submit{
+        border: none;
+        background: #e8e8e8;
+        margin: 20px 0;
+        width: 200px;
+        height: 45px;
+        border-radius: 15px;
+    }
+    .submit.dark-mode{
+        background: #393939;
+        color: #f2f2f2;
+    }
     input{
         width: 25%;
         height: 45px;
@@ -152,5 +164,8 @@
         width: 70px;
         border-radius: 25px;
         height: 35px;
+    }
+    input.dark-mode:focus{
+        background: #393939;
     }
 </style>
