@@ -7,6 +7,7 @@
 </head>
 <body>
 <header id="header">
+    <a href="/add" id="add">Добавить пост</a>
     <button id="background-button" disabled></button>
     <button id="theme-toggle"></button>
 </header>
@@ -22,6 +23,7 @@
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');
+        document.getElementById('add').classList.add('dark-mode');
         document.getElementById('pnf').classList.add('dark-mode');
         document.getElementById('theme-toggle').classList.add('dark-mode');
     }
@@ -29,6 +31,7 @@
         document.body.classList.toggle('dark-mode');
         document.getElementById('header').classList.toggle('dark-mode');
         document.getElementById('pnf').classList.toggle('dark-mode');
+        document.getElementById('add').classList.toggle('dark-mode');
         document.getElementById('theme-toggle').classList.toggle('dark-mode');
         const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
         localStorage.setItem('theme', newTheme);
@@ -37,6 +40,16 @@
 </body>
 </html>
 <style>
+    #add{
+        right: 150px;
+        top: 37px;
+        position: fixed;
+        color: #333;
+        text-decoration: none;
+    }
+    #add.dark-mode{
+        color: #f2f2f2;
+    }
     .pnf{
         position: absolute;
         top: 30%;

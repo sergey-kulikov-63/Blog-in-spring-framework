@@ -35,6 +35,10 @@ public class MainController {
         model.addAttribute("posts", posts); // добавляем их на страницу
         return "main"; // выводим html страницу с постами
     }
+    @GetMapping("/add")
+    public String addingPostView(){
+        return "add";
+    }
     @GetMapping("/{id}")
     public String postView(@PathVariable Long id, Model model) { // принимаем параметры (id поста и шаблон)
         Post post = postRepo.findById(id).orElse(null); // создаём объект поста с указанным id (если пост с таким id не найден в бд, пост равен null)

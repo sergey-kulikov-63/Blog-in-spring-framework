@@ -7,6 +7,7 @@
 </head>
 <body>
 <header id="header">
+    <a href="/add" id="add">Добавить пост</a>
     <button id="background-button" disabled></button>
     <button id="theme-toggle"></button>
 </header>
@@ -41,6 +42,7 @@
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');
         document.getElementById('theme-toggle').classList.add('dark-mode');
+        document.getElementById('add').classList.add('dark-mode');
         document.getElementById('input1').classList.add('dark-mode');
         document.getElementById('input2').classList.add('dark-mode');
         document.getElementById('submit').classList.add('dark-mode');
@@ -52,6 +54,7 @@
         document.body.classList.toggle('dark-mode');
         document.getElementById('header').classList.toggle('dark-mode');
         document.getElementById('theme-toggle').classList.toggle('dark-mode');
+        document.getElementById('add').classList.toggle('dark-mode');
         document.getElementById('post').classList.toggle('dark-mode');
         document.getElementById('input1').classList.toggle('dark-mode');
         document.getElementById('input2').classList.toggle('dark-mode');
@@ -164,6 +167,16 @@
         width: 70px;
         border-radius: 25px;
         height: 35px;
+    }
+    #add{
+        right: 150px;
+        top: 37px;
+        position: fixed;
+        color: #333;
+        text-decoration: none;
+    }
+    #add.dark-mode{
+        color: #f2f2f2;
     }
     input.dark-mode:focus{
         background: #393939;
