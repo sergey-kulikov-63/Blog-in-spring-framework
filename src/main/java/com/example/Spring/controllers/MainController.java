@@ -11,14 +11,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.object.SqlQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@RequestMapping("/posts")
 @Controller
 public class MainController {
     @Autowired
@@ -33,11 +30,18 @@ public class MainController {
     public String main(Model model){ // принимаем параметр (шаблон)
         Iterable<Post> posts = postRepo.findAll(); // находим все посты из бд
         model.addAttribute("posts", posts); // добавляем их на страницу
-        return "main"; // выводим html страницу с постами
+        return "main"; // выводим страницу с постами
     }
     @GetMapping("/add")
     public String addingPostView(){
-        return "add";
+        return "add"; // перенаправляем на страницу добавления поста
+    }
+    @PostMapping("/add")
+    public String addingPost(@RequestParam String title, @RequestParam String anons,
+                             @RequestParam String text){ // принимаем параметры (название, анонс и текст поста)
+        Post post = new Post(title,anons,text,LocalDate.now()); // создание объекта поста
+        postRepo.save(post); // сохраняем пост в бд
+        return "redirect:/posts/"; // перенаправляем на главную страницу
     }
     @GetMapping("/{id}")
     public String postView(@PathVariable Long id, Model model) { // принимаем параметры (id поста и шаблон)
@@ -48,7 +52,7 @@ public class MainController {
             if (comments != null) { // если комментарии к посту есть
                 model.addAttribute("comments", comments); // добавляем их на страницу
             }
-            return "post"; // возращаем пост
+            return "post"; // возращаем страницу поста
         }else { // если же поста с таким id нет (пост равен null)
             return "pageNotFound"; // возвращаем страницу с ошибкой
         }
@@ -56,7 +60,7 @@ public class MainController {
 
     @PostMapping("/{id}")
     public String leaveComment(@PathVariable Long id, @RequestParam String name, @RequestParam String email,
-                               @RequestParam String text, Model model){ // принимаем параметры (id поста, три текстовых значения и шаблон)
+                               @RequestParam String text){ // принимаем параметры (id и текст поста, имя и email пользователя)
         Comment comment = new Comment(name,text,email,LocalDate.now(),postRepo.findById(id).orElse(null)); // создаём объект комментария к посту
         User user = new User(name,email); // создаём объект пользователя
         commentRepo.save(comment); // сохраняем коммент в бд
@@ -65,6 +69,6 @@ public class MainController {
                 Integer.class, name, email) == 0){ // если пользователя с такими же данными в бд нет
             userRepo.save(user); // сохраняем нового пользователя
         }
-        return "redirect:/{id}"; // перенаправляем на страницу с постом
+        return "redirect:/posts/{id}"; // перенаправляем на страницу с постом
     }
 }

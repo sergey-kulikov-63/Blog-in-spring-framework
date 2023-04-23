@@ -13,13 +13,13 @@
 </header>
 <div class="pnf" id="pnf">
     <h1>Страница не найдена</h1>
-    <h5><a href="/">Вернутся на главную</a></h5>
+    <h5><a href="/posts/">Вернутся на главную</a></h5>
 </div>
 <script>
     window.onload = function() {
         setTimeout(function () {
             document.body.classList.add('body_visible');
-        }, 100);}
+        }, 500);}
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');

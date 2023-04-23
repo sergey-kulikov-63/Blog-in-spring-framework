@@ -7,7 +7,7 @@
 </head>
 <body>
 <header id="header">
-    <a href="/add" id="add">Добавить пост</a>
+    <a href="/posts/add" id="add">Добавить пост</a>
     <button id="background-button" disabled></button>
     <button id="theme-toggle"></button>
 </header>
@@ -26,10 +26,10 @@
             <h6 th:text="${com.getComment_text()}"></h6>
             <p align="right" style="color: #9d9d9d" th:text="${com.getComment_date()}">
         </div>
-    <form th:action="'/'+${post.post_id}" method="post">
-        <input id="input1" type="text" name="name" placeholder="Имя">
-        <input id="input2" type="text" name="email" placeholder="Почта (никому не видна)"><br>
-        <textarea id="textarea" name="text" placeholder="Текст комментария"></textarea><br>
+    <form th:action="'/posts/'+${post.post_id}" method="post">
+        <input id="input1" type="text" name="name" placeholder="Имя" required>
+        <input id="input2" type="email" name="email" placeholder="Почта (никому не видна)" required><br>
+        <textarea id="textarea" name="text" placeholder="Текст комментария" required></textarea><br>
         <button class="submit" id="submit" type="submit">Оставить комментарий</button>
     </form>
 </div>
@@ -37,7 +37,7 @@
     window.onload = function() {
         setTimeout(function () {
             document.body.classList.add('body_visible');
-        }, 100);}
+        }, 500);}
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');

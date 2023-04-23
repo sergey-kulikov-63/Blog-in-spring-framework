@@ -72,11 +72,10 @@ public class Post {
     }
 
     public Post(String post_title, String post_anons, String post_text,
-                LocalDate post_date, List<Comment> comments) {
+                LocalDate post_date) {
         this.post_title = post_title;
         this.post_anons = post_anons;
         this.post_text = post_text;
         this.post_date = post_date;
-        this.comments = comments;
     }
 }
