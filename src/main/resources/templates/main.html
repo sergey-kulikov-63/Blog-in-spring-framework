@@ -7,7 +7,7 @@
 </head>
 <body>
 <header id="header">
-    <a href="/add" id="add">Добавить пост</a>
+    <a href="/posts/add" id="add">Добавить пост</a>
     <button id="background-button" disabled></button>
     <button id="theme-toggle"></button>
 </header>
@@ -25,7 +25,7 @@
     window.onload = function() {
         setTimeout(function () {
             document.body.classList.add('body_visible');
-        }, 100);}
+        }, 500);}
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
         document.getElementById('header').classList.add('dark-mode');
